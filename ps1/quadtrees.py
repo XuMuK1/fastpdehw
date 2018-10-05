@@ -66,6 +66,7 @@ def ConstructTree(xs,ms,root,level):
     if(len(xs.shape)==1 or xs.shape[1]==1):
         #1 particle, leave it
         root.mass = ms
+        #print('construct root.coord=',xs)
         root.coord = xs
         root.level = level
         
@@ -83,7 +84,7 @@ def ConstructTree(xs,ms,root,level):
     for clId in clIds:
         clKeys = (clusters==clId)
         child = TreeNode(boxsize=np.linalg.norm(xMax-separators,2),level=level+1)
-        child=ConstructTree(xs[:,clKeys],ms[clKeys],child,level+1)
+        child=ConstructTree(np.squeeze(xs[:,clKeys]),ms[clKeys],child,level+1)
         child.recomputeValues()
         root.addChild(child)
     
