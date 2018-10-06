@@ -41,6 +41,17 @@ class TreeNode:
             return self.coord, self.mass
         
 
+    def getNumberOfNodes(self):
+        if(len(self.children)==0):
+            return 1
+        else:
+            res=1 #count this particular node
+            for child in self.children:
+                res=res+ child.getNumberOfNodes()
+            
+            return res    
+        
+
 
 
 #CONSTRUCTION
